@@ -11,6 +11,9 @@ import OrdersDone from "./Components/Orders/OrdersDone";
 import OrdersComponent from "./Components/Orders/OrdersComponent";
 import Account from "./Pages/Account";
 import Reports from "./Pages/Reports";
+import Address from "./Pages/Address";
+import Share from "./Pages/Share";
+import Information from "./Pages/Information";
 
 function App() {
   return (
@@ -18,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<Login />} />
-        <Route path="/sign-up" element={<Register />} />
+        <Route path="/sign-up/:id" element={<Register />} />
         <Route exact path="/orders" element={<Orders />}>
           <Route path="done" element={<OrdersDone />} />
           <Route path="grab-one" element={<OrdersComponent />} />
@@ -29,6 +32,9 @@ function App() {
         <Route path="/grab-order" element={<GrabOrder />} />
         <Route path="/account" element={<Account />} />
         <Route path="/reports" element={<Reports />} />
+        <Route path="/address" element={<Address />} />
+        <Route path="/share" element={<Share />} />
+        <Route path="/information" element={<Information />} />
       </Routes>
     </BrowserRouter>
   );

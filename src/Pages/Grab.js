@@ -12,7 +12,7 @@ const Grab = () => {
           <Navbar />
         </div>
         <div className="absolute w-full">
-          <div className="px-28 py-3">
+          <div className="px-4 lg:px-28 py-3">
             <h1 className="text-green-500 font-semibold text-2xl py-3">
               Grab an order
             </h1>
@@ -30,7 +30,7 @@ const Grab = () => {
                 </h1>
               </div>
             </div>
-            <div className="shadow bg-white p-2 my-4 rounded-xl grid grid-cols-2 gap-3">
+            <div className="shadow bg-white p-2 my-4 mb-24 lg:mb-24 rounded-xl flex flex-col lg:grid lg:grid-cols-2 lg:gap-3">
               <Card />
               <Card />
               <Card />

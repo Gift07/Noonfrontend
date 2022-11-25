@@ -17,9 +17,11 @@ export const SigninAction = createAsyncThunk(
 
 export const SignupAction = createAsyncThunk(
   "Auth/SignUp",
-  async (formdata, { rejectWithValue }) => {
+  async ({ formdata }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/signup", formdata);
+      const { data } = await axios.post("auth/register", formdata);
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
       return data;
     } catch (error) {
       return rejectWithValue(error);

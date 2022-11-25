@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import { IoCashOutline, IoNotificationsOutline } from "react-icons/io5";
+import { BsCashStack } from "react-icons/bs";
+import { FaAddressBook, FaShareAltSquare } from "react-icons/fa";
 import { TbReportAnalytics } from "react-icons/tb";
+import { MdOutlineSecurity } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
@@ -55,7 +58,7 @@ const Profile = () => {
                 </div>
                 <div>
                   <h1 className="text-green-600 text-3xl font-semibold py-2">
-                    $10.522
+                    ${account.balance}
                   </h1>
                   <div className="w-full flex items-center justify-between">
                     <button className="bg-green-400 px-3 py-2 rounded-lg text-blue-600 text-xs">
@@ -95,16 +98,27 @@ const Profile = () => {
                 <h1 className="uppercase">Transactions</h1>
                 <ul>
                   <li className="py-3 border-b border-gray-300 text-sm">
-                    Receiving Address
+                    <Link className="flex items-center gap-x-2" to="/address">
+                      <FaAddressBook /> Receiving Address
+                    </Link>
                   </li>
                   <li className="py-3 border-b border-gray-300 text-sm">
-                    Receiving Address
+                    <Link className="flex items-center gap-x-2" to="/share">
+                      <FaShareAltSquare />
+                      Invite
+                    </Link>
                   </li>
                   <li className="py-3 border-b border-gray-300 text-sm">
-                    Receiving Address
+                    <Link
+                      className="flex items-center gap-x-2"
+                      to="/information"
+                    >
+                      <BsCashStack /> Bind Withdraw information
+                    </Link>
                   </li>
-                  <li className="py-3 border-b border-gray-300 text-sm">
-                    Receiving Address
+                  <li className="py-3 border-b border-gray-300 text-sm flex items-center gap-x-2">
+                    <MdOutlineSecurity />
+                    Account security
                   </li>
                 </ul>
                 <button className="px-5 py-2 text-sm text-white bg-red-600 rounded-md my-2">

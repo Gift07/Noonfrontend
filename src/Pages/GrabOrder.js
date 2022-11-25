@@ -5,14 +5,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 const GrabOrder = () => {
   return (
     <div className="w-screen min-h-screen overflow-x-hidden bg-green-100 font-popins flex flex-col">
-      <div className="px-28">
+      <div className="px-4 lg:px-28">
         <div className="h-8 w-8 flex items-center justify-center my-4 bg-green-400 rounded-full">
           <AiOutlineArrowLeft />
         </div>
         <h1 className="text-xl text-green-500 font-semibold">Grab Order</h1>
       </div>
       <div className="w-full flex items-center justify-center py-4">
-        <div className="w-8/12 py-2 shadow rounded-lg bg-white pl-2">
+        <div className="w-11/12 lg:w-8/12 py-2 shadow rounded-lg bg-white pl-2">
           <div>
             <h1 className="uppercase py-1">kjlajd90393093</h1>
           </div>

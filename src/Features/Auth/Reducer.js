@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SigninAction } from "./Action";
+import { SigninAction, SignupAction } from "./Action";
 
 const initialState = {
   isAuthenticated: false,
@@ -23,6 +23,17 @@ export const authSlice = createSlice({
         state.username = action.payload;
       })
       .addCase(SigninAction.rejected, (state, action) => {
+        state.authLoading = false;
+        state.authError = action.payload;
+      })
+      .addCase(SignupAction.pending, (state) => {
+        state.authLoading = true;
+      })
+      .addCase(SignupAction.fulfilled, (state, action) => {
+        state.authLoading = false;
+        state.isAuthenticated = true;
+      })
+      .addCase(SignupAction.rejected, (state, action) => {
         state.authLoading = false;
         state.authError = action.payload;
       });
