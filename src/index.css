@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.colors {
+  background: linear-gradient(
+    0deg,
+    rgba(179, 229, 230, 1) 0%,
+    rgba(72, 248, 101, 1) 0%,
+    rgba(45, 253, 69, 0) 100%
+  );
+}
+.glass {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
