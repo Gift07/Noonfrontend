@@ -17,7 +17,7 @@ const Share = () => {
   );
   useEffect(() => {
     dispatch(GetAccount({ axiosPrivate }));
-  }, [dispatch]);
+  }, [dispatch, axiosPrivate]);
   return (
     <div className="bg-green-100 w-screen h-screen font-popins">
       <div className="py-4 px-4 lg:px-28 flex gap-x-2">

@@ -14,6 +14,7 @@ import Reports from "./Pages/Reports";
 import Address from "./Pages/Address";
 import Share from "./Pages/Share";
 import Information from "./Pages/Information";
+import Recharge from "./Pages/Recharge";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/address" element={<Address />} />
         <Route path="/share" element={<Share />} />
         <Route path="/information" element={<Information />} />
+        <Route path="/recharge" element={<Recharge />} />
       </Routes>
     </BrowserRouter>
   );

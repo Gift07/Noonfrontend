@@ -5,7 +5,6 @@ import useRefreshToken from "./useRefreshToken";
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
   const access = localStorage.getItem("access");
-
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
       (config) => {
@@ -35,7 +34,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [refresh]);
+  }, [access, refresh]);
 
   return axiosPrivate;
 };

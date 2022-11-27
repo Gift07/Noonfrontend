@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 import { GetAccount } from "../Features/Account/Action";
-
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,7 +18,8 @@ const Profile = () => {
   );
   useEffect(() => {
     dispatch(GetAccount({ axiosPrivate }));
-  }, [dispatch]);
+  }, [dispatch, axiosPrivate]);
+
   return (
     <div className="w-screen min-h-screen overflow-x-hidden bg-green-100 font-popins flex flex-col">
       <div className="relative w-screen h-[28rem]">
@@ -38,16 +38,20 @@ const Profile = () => {
               />
             </div>
             <div>
-              <h1 className="text-lg">+{account.user.phonenumber}</h1>
-              <div className="flex items-center  gap-x-6">
-                <h1 className="text-lg">
-                  Extension code:
-                  <p className="uppercase">{account.user_code}</p>
-                </h1>
-                <button className="px-6 py-2 text-xs rounded-md bg-green-500 text-blue-600">
-                  Copy
-                </button>
-              </div>
+              {account && (
+                <>
+                  <h1 className="text-lg">+{account.user.phonenumber}</h1>
+                  <div className="flex items-center  gap-x-6">
+                    <h1 className="text-lg">
+                      Extension code:
+                      <p className="uppercase">{account.user_code}</p>
+                    </h1>
+                    <button className="px-6 py-2 text-xs rounded-md bg-green-500 text-blue-600">
+                      Copy
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <div className="lg:px-28 flex flex-col lg:flex items-center gap-x-6 w-full">
@@ -64,7 +68,10 @@ const Profile = () => {
                     <button className="bg-green-400 px-3 py-2 rounded-lg text-blue-600 text-xs">
                       Withdraw
                     </button>
-                    <button className="bg-gray-300 px-3 py-2 rounded-lg text-xs  text-gray-600">
+                    <button
+                      onClick={() => navigate("/recharge")}
+                      className="bg-gray-300 px-3 py-2 rounded-lg text-xs  text-gray-600"
+                    >
                       Recharge
                     </button>
                   </div>
