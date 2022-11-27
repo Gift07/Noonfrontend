@@ -127,25 +127,18 @@ const Home = () => {
           </h1>
         </div>
         <p className="text-sm px-4 lg:px-20 text-center">
-          Noon is the second largest e-commerce platform in the Middle East. It
-          is built by the main investor Emaar Real Estate and the Saudi
-          sovereign fund with a joint investment of US$1 billion. Emaar is one
-          of the largest real estate developers in the Middle East. Its
-          properties include the world's tallest building, the Burj Khalifa, and
-          the world's largest shopping mall, Dubai Mall. Its founder, Mohamed
-          Alabbar, was the chief advisor to the King of Dubai and Sheikh
-          Mohammed bin Rashid Al Maktoum, Vice President and Prime Minister of
-          the United Arab Emirates. Platform advantages: 1. Localized operation,
-          full-category shopping experience, and obvious advantages in overseas
-          warehouses; 2. The Internet penetration rate is 60%, of which the UAE
-          penetration rate exceeds 909%, and the development potential is huge.
-          The title, price, details and other information content of the
-          goods/services displayed by noon cross-border (including websites,
-          clients, etc.) are provided by the actual service provider. If the
-          user has any questions about the title, price, details and other
-          information of the goods/services, he can directly communicate with
-          the online customer service for confirmation; for other questions,
-          please consult the noon economic consultant.
+          Glovo is a Spanish startup based in Barcelona in 2022. It is an
+          on-demand messaging service that buys, picks up and delivers products
+          ordered through its mobile app. It offers many services with food
+          delivery being the most popular. The company was founded by Oscar
+          Pierre and Sacha Michaud. Starting capital 20000tsh for VIP 1 4
+          percent daily 800 The starting capital of vip 2 is 100000 tsh kwfa
+          4.25 percent daily 4200 Vip3 capital 200000 at 4.5 percent every 9000
+          days VIP 4 500000 for 5 percent daily 30000 The withdrawal rate is
+          8000, the deduction is 8 percent Allow the money to reach the account
+          in 1 hour If someone invites 5 PEOPLE, you will be given 20000 if you
+          put money on your account, those people must be active Referral plan
+          Level 1 10% Level 2 5% Level 3 2.5%
         </p>
       </div>
     </div>
