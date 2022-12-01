@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8800/api/";
+const BASE_URL = "https://glovo-ecommerce.herokuapp.com/api/";
 
 export default axios.create({
   baseURL: BASE_URL,
