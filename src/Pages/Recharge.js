@@ -1,16 +1,36 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineClose } from "react-icons/ai";
 import Image from "../Assets/Image.jpeg";
 import { useState } from "react";
+import { RechargeAccount, SetPendingFunds } from "../Features/Account/Action";
+import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 
 const Recharge = () => {
+  const access = localStorage.getItem("access");
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [files, setFiles] = useState(null);
   const [amount, setAmount] = useState(0.0);
+  const [transaction, setTransaction] = useState("");
   const [close, setClose] = useState(false);
   const [error, setError] = useState("");
+  const rechargeAmounts = [
+    10, 15, 20, 25, 30, 35, 40, 45, 60, 65, 70, 75, 80, 85,
+  ];
 
+  const handleSubmit = () => {
+    let formdata = new FormData();
+
+    formdata.append("amount", amount);
+    formdata.append("transaction", transaction);
+    formdata.append("Image", files);
+    dispatch(RechargeAccount({ axiosPrivate, formdata }));
+    dispatch(SetPendingFunds({ axiosPrivate }));
+  };
+
+  if (!access) return <Navigate to="/" />;
   return (
     <div className="relative">
       <div className="absolute bg-green-100 w-screen h-screen font-popins">
@@ -23,7 +43,7 @@ const Recharge = () => {
           </div>
           <h1 className="text-xl text-green-400 font-semibold">Recharge</h1>
         </div>
-        <div className="px-4 pt-5">
+        <div className="px-4 lg:px-28 pt-5">
           <div className="flex items-center gap-x-3">
             <label className="uppercase text-xs">amount</label>
             <input
@@ -35,42 +55,15 @@ const Recharge = () => {
           {error && <h1 className="text-center text-red-500">{error}</h1>}
           <div className="bg-white shadow w-full rounded-xl flex items-center justify-center my-3">
             <div className="grid grid-cols-2 gap-4 w-full p-3">
-              <div
-                onClick={() => setAmount(5)}
-                className="bg-gray-200 w-full h-10 flex items-center justify-center"
-              >
-                <h1>5</h1>
-              </div>
-              <div
-                onClick={() => setAmount(10)}
-                className="bg-gray-200 w-full h-10 flex items-center justify-center"
-              >
-                <h1>10</h1>
-              </div>
-              <div
-                onClick={() => setAmount(15)}
-                className="bg-gray-200 w-full h-10 flex items-center justify-center"
-              >
-                <h1>15</h1>
-              </div>
-              <div
-                onClick={() => setAmount(20)}
-                className="bg-gray-200 w-full h-10 flex items-center justify-center"
-              >
-                <h1>20</h1>
-              </div>
-              <div
-                onClick={() => setAmount(25)}
-                className="bg-gray-200 w-full h-10 flex items-center justify-center"
-              >
-                <h1>25</h1>
-              </div>
-              <div
-                onClick={() => setAmount(30)}
-                className="bg-gray-200 w-full h-10 flex items-center justify-center"
-              >
-                <h1>30</h1>
-              </div>
+              {rechargeAmounts.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => setAmount(item)}
+                  className="bg-gray-200 w-full h-10 flex items-center justify-center"
+                >
+                  <h1>{item}</h1>
+                </div>
+              ))}
             </div>
           </div>
           <div className="w-full">
@@ -94,7 +87,7 @@ const Recharge = () => {
       </div>
       {close && (
         <div className="absolute z-20 w-screen h-screen backdrop-blur">
-          <div className="w-full px-4 pt-4 flex justify-end">
+          <div className="w-full px-4 lg:px-28 pt-4 flex justify-end">
             <div
               onClick={() => setClose(!close)}
               className="bg-white p-3 rounded-full"
@@ -102,7 +95,7 @@ const Recharge = () => {
               <AiOutlineClose />
             </div>
           </div>
-          <div className="w-full flex items-center justify-center px-4 pt-4">
+          <div className="w-full flex items-center justify-center px-4 lg:px-28 pt-4">
             <div className="w-full bg-white rounded-xl">
               <div className="w-full px-4">
                 <div className="flex items-center justify-between">
@@ -122,16 +115,33 @@ const Recharge = () => {
                 <img
                   src={Image}
                   alt="pay"
-                  className="w-11/12 h--44 object-cover"
+                  className="w-11/12 lg:w-7/12 h-96 object-contain"
                 />
               </div>
               <div className="w-full px-4 pt-2">
+                <div className="flex flex-col">
+                  <label>Upload the image</label>
+                  <input
+                    type={"file"}
+                    name="file"
+                    className=""
+                    onChange={(e) => setFiles(e.target.files[0])}
+                  />
+                </div>
                 <div className="flex items-center justify-between">
                   <h1>Transaction serial Number</h1>
-                  <input className="p-2 w-24 h-6 bg-green-500 rounded-lg py-3" />
+                  <input
+                    placeholder="Enter Number"
+                    value={transaction}
+                    onChange={(e) => setTransaction(e.target.value)}
+                    className="p-2 w-24 lg:w-96 text-black placeholder:text-black outline-none h-6 lg:h-10 bg-green-500 rounded-lg py-3"
+                  />
                 </div>
                 <div className="w-full flex items-center justify-center my-2 text-white">
-                  <button className="px-6 py-3 bg-blue-500 rounded-xl">
+                  <button
+                    onClick={handleSubmit}
+                    className="px-6 py-3 bg-blue-500 rounded-xl"
+                  >
                     I have finished payments
                   </button>
                 </div>

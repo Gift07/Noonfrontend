@@ -33,7 +33,7 @@ const Share = () => {
         <div className="bg-green-500 p-4 rounded-lg">
           <QRCode
             title="Invite Link"
-            value={`http://localhost:3000/sign-up/${account.user_code}`}
+            value={`http://www.glovoecommerce.net/sign-up/${account.user_code}`}
             bgColor={"#fff"}
             fgColor={"#000"}
             size={256}

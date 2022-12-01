@@ -14,9 +14,11 @@ const Home = () => {
   const { levelLoading, Levels, levelerror } = useSelector(
     (state) => state.level
   );
+  const access = localStorage.getItem("access");
   useEffect(() => {
     dispatch(GetLevels());
   }, [dispatch]);
+
   return (
     <div className="w-screen min-h-screen overflow-x-hidden bg-green-100 font-popins flex flex-col">
       <div className="relative w-screen h-[30rem]">
@@ -35,12 +37,14 @@ const Home = () => {
               <h1 className="text-2xl font-semibold text-green-800">Glovo</h1>
             </div>
             <div>
-              <button
-                onClick={() => navigate("/sign-in")}
-                className="px-4 py-2 bg-green-500 text-gray-50 rounded-lg"
-              >
-                Login
-              </button>
+              {!access && (
+                <button
+                  onClick={() => navigate("/sign-in")}
+                  className="px-4 py-2 bg-green-500 text-gray-50 rounded-lg"
+                >
+                  Login
+                </button>
+              )}
             </div>
           </div>
           <div className="px-4 lg:px-28 pt-24">
@@ -87,11 +91,13 @@ const Home = () => {
               {levelerror}
             </div>
           ) : (
-            <Fragment>
-              {Levels.map((item) => (
-                <Card item={item} />
-              ))}
-            </Fragment>
+            Levels && (
+              <Fragment>
+                {Levels.map((item) => (
+                  <Card item={item} />
+                ))}
+              </Fragment>
+            )
           )}
         </div>
         <div className="py-3 flex flex-col lg:hidden  items-center justify-center gap-x-4 my-4">
@@ -112,11 +118,13 @@ const Home = () => {
               {levelerror}
             </div>
           ) : (
-            <Fragment>
-              {Levels.map((item) => (
-                <Card item={item} />
-              ))}
-            </Fragment>
+            Levels && (
+              <Fragment>
+                {Levels.map((item) => (
+                  <Card item={item} />
+                ))}
+              </Fragment>
+            )
           )}
         </div>
       </div>

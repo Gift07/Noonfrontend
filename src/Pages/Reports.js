@@ -11,7 +11,7 @@ const Reports = () => {
           <Navbar />
         </div>
       </div>
-      <div className="absolute w-full px-28 pt-5">
+      <div className="absolute w-full px-4 lg:px-28 pt-5">
         <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
           <AiOutlineArrowLeft />
         </div>

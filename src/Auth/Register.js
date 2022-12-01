@@ -10,12 +10,12 @@ const Register = () => {
   const [formdata, setFormData] = React.useState({
     extension_code: params.id,
     username: "",
-    username: "",
     phonenumber: "",
     password: "",
     confirmPassword: "",
   });
-  const { isAuthenticated, authLoading } = useSelector((state) => state.auth);
+  const { authLoading } = useSelector((state) => state.auth);
+  const access = localStorage.getItem("access");
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
@@ -28,7 +28,7 @@ const Register = () => {
     event.preventDefault();
     dispatch(SignupAction({ formdata }));
   };
-  if (isAuthenticated) return <Navigate to="/" />;
+  if (access) return <Navigate to="/" />;
   return (
     <div className="w-screen bg-green-100 h-screen overflow-hidden font-popins flex items-center justify-center">
       <div className="w-11/12 lg:w-1/2 bg-white shadow-xl rounded-2xl p-4">

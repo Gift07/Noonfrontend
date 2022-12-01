@@ -10,7 +10,8 @@ const Login = () => {
     username: "",
     password: "",
   });
-  const { isAuthenticated, authLoading } = useSelector((state) => state.auth);
+  const { authLoading } = useSelector((state) => state.auth);
+  const access = localStorage.getItem("access");
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
@@ -23,7 +24,7 @@ const Login = () => {
     event.preventDefault();
     dispatch(SigninAction(formdata));
   };
-  if (isAuthenticated) return <Navigate to="/" />;
+  if (access) return <Navigate to="/" />;
   return (
     <div className="w-screen bg-green-100 h-screen overflow-hidden font-popins flex flex-col items-center justify-center">
       <div>
