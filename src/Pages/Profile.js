@@ -228,7 +228,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="w-full flex items-center justify-center py-3 mb-28">
-                {account && (
+                {account.user && account.user.username === "Tony Moshi" && (
                   <div className="w-11/12 lg:w-5/12 mb-28 p-2 bg-white shadow">
                     <h1 className="uppercase">Payments</h1>
                     {depositLoading ? (
