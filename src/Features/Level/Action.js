@@ -3,12 +3,12 @@ import axios from "../../axios";
 
 export const GetLevels = createAsyncThunk(
   "Level/Get",
-  async ({ rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get("/level/all");
       return data;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
   }
 );

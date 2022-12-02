@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TailSpin } from "react-loader-spinner";
 import { GetProduct } from "../Features/Orders/Action";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
+import { GetAccount } from "../Features/Account/Action";
 
 const GrabOrder = () => {
   const dispatch = useDispatch();
@@ -11,9 +12,15 @@ const GrabOrder = () => {
   const { orderLoading, order, orderError } = useSelector(
     (state) => state.order
   );
+  const { account } = useSelector((state) => state.account);
   React.useEffect(() => {
     dispatch(GetProduct({ axiosPrivate }));
   }, [dispatch, axiosPrivate]);
+  const handleClick = () => {
+    dispatch(GetProduct({ axiosPrivate }));
+    dispatch(GetAccount({ axiosPrivate }));
+    dispatch(GrabOrder({ axiosPrivate, commision: account.commision }));
+  };
   return (
     <div className="w-screen min-h-screen overflow-x-hidden bg-green-100 font-popins flex flex-col">
       <div className="px-4 lg:px-28">
@@ -50,7 +57,10 @@ const GrabOrder = () => {
         )}
       </div>
       <div className="w-full flex items-center justify-center">
-        <button className="w-48 py-2 bg-green-500 text-blue-600 rounded-lg">
+        <button
+          onClick={handleClick}
+          className="w-48 py-2 bg-green-500 text-blue-600 rounded-lg"
+        >
           Grab Order
         </button>
       </div>

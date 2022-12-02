@@ -33,7 +33,7 @@ const Share = () => {
         <div className="bg-green-500 p-4 rounded-lg">
           <QRCode
             title="Invite Link"
-            value={`http://www.glovoecommerce.net/sign-up/${account.user_code}`}
+            value={`https://www.glovoecommerce.net/sign-up/${account.user_code}`}
             bgColor={"#fff"}
             fgColor={"#000"}
             size={256}
@@ -54,10 +54,10 @@ const Share = () => {
           <div>
             <div className="text-xs ">
               <h1 className="p-2 bg-green-500 rounded-lg">
-                http://localhost:3000/sign-up/{account.user_code}
+                https://www.glovoecommerce.net/sign-up/${account.user_code}
               </h1>
               <CopyToClipboard
-                text={`http://localhost:3000/sign-up/${account.user_code}`}
+                text={`https://www.glovoecommerce.net/sign-up/${account.user_code}`}
                 onCopy={() => {
                   setIsCopied(true);
                   setTimeout(() => {
