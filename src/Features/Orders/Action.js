@@ -8,7 +8,7 @@ export const GetProduct = createAsyncThunk(
 
       return data;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
   }
 );
@@ -23,7 +23,7 @@ export const GrabOrder = createAsyncThunk(
 
       return data;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
   }
 );
