@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { GetProduct } from "./Action";
+import { GetProduct, GrabOrderAction } from "./Action";
 
 const initialState = {
   orderLoading: false,
   order: {},
   orderError: "",
+  message: "",
 };
 
 const orderSlice = createSlice({
@@ -21,6 +22,17 @@ const orderSlice = createSlice({
         state.order = action.payload;
       })
       .addCase(GetProduct.rejected, (state, action) => {
+        state.orderLoading = false;
+        state.orderError = action.payload;
+      })
+      .addCase(GrabOrderAction.pending, (state) => {
+        state.orderLoading = true;
+      })
+      .addCase(GrabOrderAction.fulfilled, (state, action) => {
+        state.orderLoading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(GrabOrderAction.rejected, (state, action) => {
         state.orderLoading = false;
         state.orderError = action.payload;
       });

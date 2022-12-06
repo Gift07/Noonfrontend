@@ -241,9 +241,14 @@ const Profile = () => {
                           <BsCashStack /> Bind Withdraw information
                         </Link>
                       </li>
-                      <li className="py-3 border-b border-gray-300 text-sm flex items-center gap-x-2">
-                        <MdOutlineSecurity />
-                        Account security
+                      <li className="py-3 border-b border-gray-300 text-sm flex">
+                        <Link
+                          className="flex items-center gap-x-2"
+                          to="/security"
+                        >
+                          <MdOutlineSecurity />
+                          Account security
+                        </Link>
                       </li>
                     </ul>
                     <button

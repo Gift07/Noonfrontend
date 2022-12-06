@@ -24,10 +24,11 @@ const Verify = () => {
     const body = {
       _id: deposit.user._id,
       amount: deposit.amount,
+      commision: deposit.commision,
     };
     dispatch(SetSuccessfull({ axiosPrivate, body }));
     dispatch(DeleteDeposit({ axiosPrivate, id: deposit._id }));
-    window.location.pathname("/profile");
+    navigate("/profile");
   };
   return (
     <div className="bg-green-100 w-screen h-screen font-popins">

@@ -5,21 +5,26 @@ import { TailSpin } from "react-loader-spinner";
 import { GetProduct } from "../Features/Orders/Action";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 import { GetAccount } from "../Features/Account/Action";
+import { GrabOrderAction } from "../Features/Orders/Action";
 
 const GrabOrder = () => {
   const dispatch = useDispatch();
   const axiosPrivate = useAxiosPrivate();
-  const { orderLoading, order, orderError } = useSelector(
+  const { orderLoading, order, orderError, message } = useSelector(
     (state) => state.order
   );
   const { account } = useSelector((state) => state.account);
+
   React.useEffect(() => {
     dispatch(GetProduct({ axiosPrivate }));
+    dispatch(GetAccount({ axiosPrivate }));
   }, [dispatch, axiosPrivate]);
+
   const handleClick = () => {
     dispatch(GetProduct({ axiosPrivate }));
-    dispatch(GetAccount({ axiosPrivate }));
-    dispatch(GrabOrder({ axiosPrivate, commision: account.commision }));
+    dispatch(
+      GrabOrderAction({ axiosPrivate, commision: account.commision / 10 })
+    );
   };
   return (
     <div className="w-screen min-h-screen overflow-x-hidden bg-green-100 font-popins flex flex-col">
@@ -50,12 +55,17 @@ const GrabOrder = () => {
                 <h1 className="text-xl text-green-500 font-semibold">
                   ${order.price}
                 </h1>
-                <h1>Commision: $0.6748</h1>
+                <h1>Commision: ${account.commision / 10}</h1>
               </div>
             </div>
           </div>
         )}
       </div>
+      {message && (
+        <div>
+          <h1 className="text-red-500 my-3">{message.message}</h1>
+        </div>
+      )}
       <div className="w-full flex items-center justify-center">
         <button
           onClick={handleClick}

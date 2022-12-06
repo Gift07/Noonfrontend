@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SigninAction, SignupAction } from "./Action";
+import { ChangePassword, SigninAction, SignupAction } from "./Action";
 
 const initialState = {
   isAuthenticated: false,
   authLoading: false,
   authError: null,
   username: "",
+  message: "",
 };
 
 export const authSlice = createSlice({
@@ -36,6 +37,17 @@ export const authSlice = createSlice({
       .addCase(SignupAction.rejected, (state, action) => {
         state.authLoading = false;
         state.authError = action.payload;
+      })
+      .addCase(ChangePassword.pending, (state) => {
+        state.authLoading = true;
+      })
+      .addCase(ChangePassword.fulfilled, (state, action) => {
+        state.authLoading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(ChangePassword.rejected, (state, action) => {
+        state.authLoading = false;
+        state.authError = action.message;
       });
   },
 });

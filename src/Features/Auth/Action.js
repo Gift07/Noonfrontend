@@ -31,9 +31,13 @@ export const SignupAction = createAsyncThunk(
 
 export const ChangePassword = createAsyncThunk(
   "Auth/ChangePassword",
-  async ({ axosPrivate, formdata }, { rejectWithValue }) => {
+  async ({ axiosPrivate, formdata }, { rejectWithValue }) => {
     try {
-      const { data } = await axosPrivate.patch("auth/changepassword", formdata);
+      const { data } = await axiosPrivate.patch(
+        "auth/changepassword",
+        formdata
+      );
+
       return data;
     } catch (error) {
       return rejectWithValue(error);

@@ -19,8 +19,7 @@ export const RechargeAccount = createAsyncThunk(
   async ({ axiosPrivate, formdata }, { rejectWithValue }) => {
     try {
       const { data } = await axiosPrivate.post("/deposits/create", formdata);
-
-      window.location.pathname("/");
+      console.log(data);
       return data;
     } catch (error) {
       rejectWithValue(error);
@@ -32,7 +31,7 @@ export const SetPendingFunds = createAsyncThunk(
   "Account/Set",
   async ({ axiosPrivate }, { rejectWithValue }) => {
     try {
-      const { data } = await axiosPrivate.post("/account/set-pending");
+      const { data } = await axiosPrivate.patch("/account/set-pending");
       return data;
     } catch (error) {
       rejectWithValue(error);
@@ -45,7 +44,7 @@ export const SetSuccessfull = createAsyncThunk(
   async ({ axiosPrivate, body }, { rejectWithValue }) => {
     try {
       const { data } = await axiosPrivate.patch(
-        "/account/set-successfull",
+        "/account/set-successful",
         body
       );
 

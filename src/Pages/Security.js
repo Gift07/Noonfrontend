@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { ChangePassword } from "../Features/Auth/Action";
+import { Bars } from "react-loader-spinner";
 
 const Security = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { authLoading, message, authError } = useSelector(
+    (state) => state.auth
+  );
   const axiosPrivate = useAxiosPrivate();
   const [formdata, setFormdata] = useState({
     oldPassword: "",
@@ -20,6 +24,7 @@ const Security = () => {
   const handleClck = () => {
     dispatch(ChangePassword({ axiosPrivate, formdata }));
   };
+  if (message !== "") return <Navigate to="/profile" />;
   return (
     <div className="bg-green-100 w-screen h-screen font-popins">
       <div className="py-4 px-4 lg:px-28 flex gap-x-2">
@@ -69,12 +74,18 @@ const Security = () => {
             </div>
 
             <div>
-              <button
-                onClick={handleClck}
-                className="px-12 py-2 text-white bg-blue-500 rounded-lg text-xs"
-              >
-                Change Password
-              </button>
+              {authLoading ? (
+                <Bars height={30} width={30} color="dodgerBlue" />
+              ) : authError ? (
+                <div>{authError}</div>
+              ) : (
+                <button
+                  onClick={handleClck}
+                  className="px-12 py-2 text-white bg-blue-500 rounded-lg text-xs active:bg-blue-600"
+                >
+                  Change Password
+                </button>
+              )}
             </div>
           </div>
         </div>
