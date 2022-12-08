@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { GetAccount, RechargeAccount } from "./Action";
+import { BindInformation, GetAccount, RechargeAccount } from "./Action";
 
 const initialState = {
   accountloading: false,
@@ -36,6 +36,17 @@ const accountSlice = createSlice({
       .addCase(RechargeAccount.rejected, (state, action) => {
         state.accountloading = false;
         state.accountError = action.payload;
+      })
+      .addCase(BindInformation.pending, (state) => {
+        state.accountloading = true;
+      })
+      .addCase(BindInformation.fulfilled, (state, action) => {
+        state.accountloading = false;
+        state.message = action.payload;
+      })
+      .addCase(BindInformation.rejected, (state, action) => {
+        state.accountloading = false;
+        state.accountError = action.error;
       });
   },
 });

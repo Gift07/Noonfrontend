@@ -5,6 +5,7 @@ import Account from "./Features/Account/Reducer";
 import Order from "./Features/Orders/Reducer";
 import Deposit from "./Features/Deposits/Reducer";
 import Withdraw from "./Features/Withdraw/Reducer";
+import Notification from "./Features/Notification/Reducer";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     order: Order,
     deposit: Deposit,
     withdraw: Withdraw,
+    notification: Notification,
   },
 });
 

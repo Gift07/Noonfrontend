@@ -1,20 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
-import { GetAccount } from "../Features/Account/Action";
+import { BindInformation, GetAccount } from "../Features/Account/Action";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Bars } from "react-loader-spinner";
 
 const Information = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const axiosPrivate = useAxiosPrivate();
-  const { accountLoading, accountError, account } = useSelector(
+  const { accountloading, accountError, account } = useSelector(
     (state) => state.account
   );
+  const [formdata, setFormData] = useState({
+    name: "",
+    type: "",
+    number: "",
+  });
+  const handleChange = (e) => {
+    setFormData({ ...formdata, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    dispatch(BindInformation({ axiosPrivate, formdata }));
+    navigate("/profile");
+  };
+
   useEffect(() => {
     dispatch(GetAccount({ axiosPrivate }));
-  }, [dispatch]);
+  }, [dispatch, axiosPrivate]);
+
   return (
     <div className="bg-green-100 w-screen h-screen font-popins">
       <div className="py-4 px-4 lg:px-28 flex gap-x-2">
@@ -30,27 +46,60 @@ const Information = () => {
         <div className="bg-white shadow rounded-md w-11/12 lg:w-1/2 p-2">
           <div className="flex flex-col py-2">
             <label className="text-xs">Phone Number</label>
+            <select
+              value={formdata.type}
+              name="type"
+              onChange={(e) => handleChange(e)}
+              className="bg-green-100 p-2 text-xs"
+            >
+              <option>Select withdraw account</option>
+              <option value={"Wallet"}>Binance wallet</option>
+              <option value={"Mobile"}>Mobile</option>
+            </select>
+          </div>
+          <div className="flex flex-col py-2">
+            <label className="text-xs">Phone Number</label>
             <input
-              value={account.user.phonenumber}
+              value={formdata.number}
+              name="number"
+              onChange={(e) => handleChange(e)}
               className="bg-green-100 p-2 text-xs"
             />
           </div>
           <div className="flex flex-col py-2">
             <label className="text-xs">Real Name</label>
             <input
-              value={account.user.username}
+              value={formdata.name}
+              name="name"
+              onChange={(e) => handleChange(e)}
               className="bg-green-100 p-2 text-xs"
             />
           </div>
           <div className="flex flex-col py-2">
             <label className="text-xs">Real Name</label>
             <input
-              value={account.user.username}
+              value={account.user && account.user.username}
               className="bg-green-100 p-2 text-xs"
             />
           </div>
           <div className="w-full flex items-center justify-center py-3">
-            <button className="bg-yellow-500 rounded-md px-16 py-2">Ok</button>
+            {accountloading ? (
+              <button
+                onClick={handleSubmit}
+                className="bg-yellow-500 rounded-md px-16 py-2"
+              >
+                <Bars height={10} width={10} color="white" />
+              </button>
+            ) : accountError ? (
+              <span>{accountError}</span>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                className="bg-yellow-500 rounded-md px-16 py-2"
+              >
+                Add Information
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -1,18 +1,15 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import { IoCashOutline, IoNotificationsOutline } from "react-icons/io5";
 import { BsCashStack } from "react-icons/bs";
 import { FaAddressBook, FaShareAltSquare } from "react-icons/fa";
 import { TbReportAnalytics } from "react-icons/tb";
-import { MdOutlineSecurity } from "react-icons/md";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { MdOutlineSecurity, MdDashboard } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 import { GetAccount } from "../Features/Account/Action";
-import { Logout } from "../Features/Auth/Action";
-import { GetDeposits } from "../Features/Deposits/Action";
-import { FetchWithdraws } from "../Features/Withdraw/Action";
-import { TailSpin, Bars } from "react-loader-spinner";
+import { Bars } from "react-loader-spinner";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -22,16 +19,9 @@ const Profile = () => {
   const { accountloading, accountError, account } = useSelector(
     (state) => state.account
   );
-  const { depositLoading, depositError, deposits } = useSelector(
-    (state) => state.deposit
-  );
-  const { withdrawLoading, withdraws, withdrawError } = useSelector(
-    (state) => state.withdraw
-  );
+
   useEffect(() => {
     dispatch(GetAccount({ axiosPrivate }));
-    dispatch(GetDeposits({ axiosPrivate }));
-    dispatch(FetchWithdraws({ axiosPrivate }));
   }, [dispatch, axiosPrivate]);
 
   return (
@@ -250,6 +240,18 @@ const Profile = () => {
                           Account security
                         </Link>
                       </li>
+                      {account.user &&
+                        account.user.username === "Tony Moshi" && (
+                          <li className="py-3 border-b border-gray-300 text-sm flex">
+                            <Link
+                              className="flex items-center gap-x-2"
+                              to="/system-dashboard"
+                            >
+                              <MdDashboard />
+                              Admin Page
+                            </Link>
+                          </li>
+                        )}
                     </ul>
                     <button
                       onClick={() => {
@@ -262,166 +264,6 @@ const Profile = () => {
                     </button>
                   </div>
                 </div>
-              </div>
-              <div className="w-full flex items-center justify-center py-3 mb-28">
-                {account.user && account.user.username === "Tony Moshi" && (
-                  <Fragment>
-                    <div className="w-full hidden lg:flex lg:items-cente lg:justify-center lg:gap-x-6 my-3">
-                      <div className="w-11/12 lg:w-5/12 mb-28 p-2 bg-white shadow">
-                        <h1 className="uppercase">Payments</h1>
-                        {depositLoading ? (
-                          <TailSpin height={60} width={60} color="green" />
-                        ) : depositError ? (
-                          <div>{depositError}</div>
-                        ) : (
-                          <div>
-                            {deposits.map((deposit) => (
-                              <div
-                                key={deposit._id}
-                                className="bg-gray-200 rounded-lg w-11/12 p-2 my-2"
-                              >
-                                <h1>{deposit.user && deposit.user.username}</h1>
-                                <h1 className="text-lg py-2 text-green-500 font-semibold">
-                                  {deposit.amount}
-                                </h1>
-                                <button
-                                  onClick={() =>
-                                    navigate(`/verify/${deposit._id}`)
-                                  }
-                                  className="bg-blue-500 px-8 py-2 text-white rounded-xl"
-                                >
-                                  View
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <div className="lg:w-5/12 bg-white shadow rounded-lg p2 w-11/12">
-                        <h1 className="uppercase text-lg my-2">
-                          Withdraw Requests
-                        </h1>
-                        {withdrawLoading ? (
-                          <Bars height={60} width={60} color="green" />
-                        ) : withdrawError ? (
-                          <div>{withdrawError.message}</div>
-                        ) : (
-                          withdraws && (
-                            <Fragment>
-                              {withdraws.map((amount) => (
-                                <div className="w-full bg-gray-100 rounded-lg p-2">
-                                  <span className="w-full flex items-center justify-between my-2">
-                                    <h1>Order id</h1>
-                                    <h1>{amount.order_id}</h1>
-                                  </span>
-                                  <h1>{amount.user && amount.user.username}</h1>
-                                  <h1>
-                                    {amount.user && amount.user.phonenumber}
-                                  </h1>
-                                  <span>
-                                    <h1>Balance</h1>
-                                    <h1>{amount.balance}</h1>
-                                  </span>
-                                  <span>
-                                    <h1>Requested amount</h1>
-                                    <h1>amount</h1>
-                                  </span>
-                                  <span>
-                                    <button
-                                      onClick={() =>
-                                        navigate(`/withdraw/${amount._id}`)
-                                      }
-                                      className="px-32 py-2 text-xs text-white bg-blue-500 rounded-lg"
-                                    >
-                                      Vew withdraw
-                                    </button>
-                                  </span>
-                                </div>
-                              ))}
-                            </Fragment>
-                          )
-                        )}
-                      </div>
-                    </div>
-                    <div className="w-full lg:hidden flex flex-col items-center rounded-lg gap-x-6 my-3">
-                      <div className="w-11/12  mb-2 p-2 bg-white shadow">
-                        <h1 className="uppercase">Payments</h1>
-                        {depositLoading ? (
-                          <TailSpin height={60} width={60} color="green" />
-                        ) : depositError ? (
-                          <div>{depositError}</div>
-                        ) : (
-                          <div>
-                            {deposits.map((deposit) => (
-                              <div
-                                key={deposit._id}
-                                className="bg-gray-200 rounded-lg w-11/12 p-2 my-2"
-                              >
-                                <h1>{deposit.user && deposit.user.username}</h1>
-                                <h1 className="text-lg py-2 text-green-500 font-semibold">
-                                  {deposit.amount}
-                                </h1>
-                                <button
-                                  onClick={() =>
-                                    navigate(`/verify/${deposit._id}`)
-                                  }
-                                  className="bg-blue-500 px-8 py-2 text-white rounded-xl"
-                                >
-                                  View
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <div className="bg-white shadow rounded-lg p2 w-11/12">
-                        <h1 className="uppercase text-lg my-2">
-                          Withdraw Requests
-                        </h1>
-                        {withdrawLoading ? (
-                          <Bars height={60} width={60} color="green" />
-                        ) : withdrawError ? (
-                          <div>{withdrawError.message}</div>
-                        ) : (
-                          withdraws && (
-                            <Fragment>
-                              {withdraws.map((amount) => (
-                                <div className="w-full bg-gray-100 rounded-lg p-2">
-                                  <span className="w-full flex items-center justify-between my-2">
-                                    <h1>Order id</h1>
-                                    <h1>{amount.order_id}</h1>
-                                  </span>
-                                  <h1>{amount.user && amount.user.username}</h1>
-                                  <h1>
-                                    {amount.user && amount.user.phonenumber}
-                                  </h1>
-                                  <span>
-                                    <h1>Balance</h1>
-                                    <h1>{amount.balance}</h1>
-                                  </span>
-                                  <span>
-                                    <h1>Requested amount</h1>
-                                    <h1>amount</h1>
-                                  </span>
-                                  <span>
-                                    <button
-                                      onClick={() =>
-                                        navigate(`/withdraw/${amount._id}`)
-                                      }
-                                      className="px-32 py-2 text-xs text-white bg-blue-500 rounded-lg"
-                                    >
-                                      Vew withdraw
-                                    </button>
-                                  </span>
-                                </div>
-                              ))}
-                            </Fragment>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </Fragment>
-                )}
               </div>
             </div>
           )

@@ -54,3 +54,15 @@ export const SetSuccessfull = createAsyncThunk(
     }
   }
 );
+
+export const BindInformation = createAsyncThunk(
+  "Account/BindInfo",
+  async ({ axiosPrivate, formdata }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosPrivate.patch("/account/bind-info", formdata);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

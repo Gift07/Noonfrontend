@@ -48,7 +48,8 @@ function App() {
         <Route path="/security" element={<Security />} />
         <Route path="/notification" element={<Notification />} />
         <Route path="/withdraw" element={<Withdraw />} />
-        <Route pat="/withdraw/:id" element={<WithdrawId />} />
+        <Route path="/withdraw/:id" element={<WithdrawId />} />
+        <Route path="/system-dashboard" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );

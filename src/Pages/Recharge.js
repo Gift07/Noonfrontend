@@ -1,10 +1,15 @@
 import { useNavigate, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineClose } from "react-icons/ai";
 import Image from "../Assets/Image.jpeg";
-import { useState } from "react";
-import { RechargeAccount, SetPendingFunds } from "../Features/Account/Action";
+import React, { useState, useEffect } from "react";
+import {
+  GetAccount,
+  RechargeAccount,
+  SetPendingFunds,
+} from "../Features/Account/Action";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
+import { SendNotificaton } from "../Features/Notification/Action";
 
 const Recharge = () => {
   const access = localStorage.getItem("access");
@@ -19,6 +24,10 @@ const Recharge = () => {
   const rechargeAmounts = [
     10, 15, 20, 25, 30, 35, 40, 45, 60, 65, 70, 75, 80, 85,
   ];
+  const { account } = useSelector((state) => state.account);
+  useEffect(() => {
+    dispatch(GetAccount({ axiosPrivate }));
+  }, [dispatch, axiosPrivate]);
 
   const handleSubmit = () => {
     let formdata = new FormData();
@@ -26,8 +35,14 @@ const Recharge = () => {
     formdata.append("amount", amount);
     formdata.append("transaction", transaction);
     formdata.append("Image", files);
+    const item = {
+      value: "Request Sent",
+      user: account.user._id,
+    };
+    dispatch(SendNotificaton({ axiosPrivate, item }));
     dispatch(RechargeAccount({ axiosPrivate, formdata }));
     dispatch(SetPendingFunds({ axiosPrivate }));
+    navigate("/profile");
   };
 
   if (!access) return <Navigate to="/" />;

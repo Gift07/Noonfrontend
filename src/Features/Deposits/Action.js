@@ -24,6 +24,18 @@ export const GetDeposit = createAsyncThunk(
   }
 );
 
+export const CancelDepost = createAsyncThunk(
+  "Deposit/Cancel",
+  async ({ axiosPrivate, formdata }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosPrivate.patch("/deposit/cancel", formdata);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const DeleteDeposit = createAsyncThunk(
   "Deposit/Delete",
   async ({ axiosPrivate, id }, { rejectWithValue }) => {
