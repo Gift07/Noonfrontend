@@ -111,7 +111,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-11/12 lg:w-5/12">
+                <div className="w-11/12 lg:w-5/12 mb-28">
                   <div className="bg-white shadow p-2 rounded-xl">
                     <h1 className="uppercase">Transactions</h1>
                     <ul>
@@ -146,6 +146,18 @@ const Profile = () => {
                           Account security
                         </Link>
                       </li>
+                      {account.user &&
+                        account.user.username === "Tony Moshi" && (
+                          <li className="py-3 border-b border-gray-300 text-sm flex">
+                            <Link
+                              className="flex items-center gap-x-2"
+                              to="/system-dashboard"
+                            >
+                              <MdDashboard />
+                              Admin Page
+                            </Link>
+                          </li>
+                        )}
                     </ul>
                     <button
                       onClick={() => {
@@ -159,7 +171,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="lg:px-28 hidden  lg:flex items-center gap-x-6 w-full">
+              <div className="lg:px-28 hidden  lg:flex gap-x-6 w-full">
                 <div className="w-11/12 lg:w-7/12">
                   <div className="bg-white shadow rounded-xl p-2 w-full">
                     <div>
@@ -205,7 +217,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-11/12 lg:w-5/12">
+                <div className="w-11/12 lg:w-5/12 mb-28">
                   <div className="bg-white shadow p-2 rounded-xl">
                     <h1 className="uppercase">Transactions</h1>
                     <ul>
