@@ -24,6 +24,7 @@ export const SignupAction = createAsyncThunk(
       if (data) {
         history.push("/sign-in");
       }
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }
