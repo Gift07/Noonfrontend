@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SignupAction } from "../Features/Auth/Action";
-import { Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams, useHistory } from "react-router-dom";
 import { Bars } from "react-loader-spinner";
 
 const Register = () => {
   const params = useParams();
+  const history = useHistory();
   console.log(params.id);
   const [formdata, setFormData] = React.useState({
     extension_code: params.id,
@@ -26,7 +27,7 @@ const Register = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(SignupAction({ formdata }));
+    dispatch(SignupAction({ formdata, history }));
   };
   if (access) return <Navigate to="/" />;
   return (
@@ -85,8 +86,8 @@ const Register = () => {
             />
           </div>
           <div>
-            <h1 className="text-xs font-semibold py-2">
-              Already have an account?
+            <h1 className="text-xs flex items-center gap-x-2 font-semibold py-2">
+              Already have an account? <Link to="sign-in">Login</Link>
             </h1>
           </div>
           <div className="pb-4">
