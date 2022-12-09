@@ -32,7 +32,7 @@ export const authSlice = createSlice({
       })
       .addCase(SignupAction.fulfilled, (state, action) => {
         state.authLoading = false;
-        state.isAuthenticated = true;
+        state.message = action.payload
       })
       .addCase(SignupAction.rejected, (state, action) => {
         state.authLoading = false;

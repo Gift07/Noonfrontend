@@ -20,10 +20,6 @@ export const SignupAction = createAsyncThunk(
   async ({ formdata, history }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("auth/register", formdata);
-
-      if (data) {
-        history.push("/sign-in");
-      }
       return data;
     } catch (error) {
       return rejectWithValue(error);

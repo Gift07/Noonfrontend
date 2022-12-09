@@ -1,12 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SignupAction } from "../Features/Auth/Action";
-import { Link, Navigate, useParams, useHistory } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { Bars } from "react-loader-spinner";
 
 const Register = () => {
   const params = useParams();
-  const history = useHistory();
   console.log(params.id);
   const [formdata, setFormData] = React.useState({
     extension_code: params.id,
@@ -15,8 +14,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
-  const { authLoading } = useSelector((state) => state.auth);
-  const access = localStorage.getItem("access");
+  const { authLoading, message } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
@@ -27,9 +25,9 @@ const Register = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(SignupAction({ formdata, history }));
+    dispatch(SignupAction({ formdata }));
   };
-  if (access) return <Navigate to="/" />;
+  if (message) return <Navigate to="/sign-in" />;
   return (
     <div className="w-screen bg-green-100 h-screen overflow-hidden font-popins flex items-center justify-center">
       <div className="w-11/12 lg:w-1/2 bg-white shadow-xl rounded-2xl p-4">
