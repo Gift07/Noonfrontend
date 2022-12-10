@@ -26,3 +26,15 @@ export const GrabOrderAction = createAsyncThunk(
     }
   }
 );
+
+export const CreateOrder = createAsyncThunk(
+  "Order/Create",
+  async ({ axiosPrivate, body }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosPrivate.post("/orders/create", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

@@ -22,9 +22,7 @@ const GrabOrder = () => {
 
   const handleClick = () => {
     dispatch(GetProduct({ axiosPrivate }));
-    dispatch(
-      GrabOrderAction({ axiosPrivate, commision: account.commision / 10 })
-    );
+    dispatch(GrabOrderAction({ axiosPrivate, commision: account.commision }));
   };
   return (
     <div className="w-screen min-h-screen overflow-x-hidden bg-green-100 font-popins flex flex-col">
@@ -55,7 +53,7 @@ const GrabOrder = () => {
                 <h1 className="text-xl text-green-500 font-semibold">
                   ${order.price}
                 </h1>
-                <h1>Commision: ${account.commision / 10}</h1>
+                <h1>Commision: ${account.commision}</h1>
               </div>
             </div>
           </div>

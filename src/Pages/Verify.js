@@ -7,6 +7,7 @@ import { DeleteDeposit, GetDeposit } from "../Features/Deposits/Action";
 import { Bars } from "react-loader-spinner";
 import { SetSuccessfull } from "../Features/Account/Action";
 import { SendNotificaton } from "../Features/Notification/Action";
+import { CreateOrder } from "../Features/Orders/Action";
 
 const Verify = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Verify = () => {
     dispatch(SendNotificaton({ axiosPrivate, item }));
     dispatch(SetSuccessfull({ axiosPrivate, body }));
     dispatch(DeleteDeposit({ axiosPrivate, id: deposit._id }));
+    dispatch(CreateOrder({ axiosPrivate, _id: deposit.user._id }));
     navigate("/system-dashboard");
   };
   const handleReject = () => {
