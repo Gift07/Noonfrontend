@@ -85,7 +85,7 @@ const Register = () => {
           </div>
           <div>
             <h1 className="text-xs flex items-center gap-x-2 font-semibold py-2">
-              Already have an account? <Link to="sign-in">Login</Link>
+              Already have an account? <Link to="/sign-in">Login</Link>
             </h1>
           </div>
           <div className="pb-4">
