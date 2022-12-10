@@ -38,3 +38,15 @@ export const CreateOrder = createAsyncThunk(
     }
   }
 );
+
+export const GrabInformation = createAsyncThunk(
+  "Grab/Info",
+  async ({ axiosPrivate }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosPrivate.get("/orders/grab-info");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
