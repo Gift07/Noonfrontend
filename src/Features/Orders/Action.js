@@ -29,9 +29,9 @@ export const GrabOrderAction = createAsyncThunk(
 
 export const CreateOrder = createAsyncThunk(
   "Order/Create",
-  async ({ axiosPrivate, body }, { rejectWithValue }) => {
+  async ({ axiosPrivate, order }, { rejectWithValue }) => {
     try {
-      const { data } = await axiosPrivate.post("/orders/create", body);
+      const { data } = await axiosPrivate.post("/orders/create", order);
       return data;
     } catch (error) {
       return rejectWithValue(error);

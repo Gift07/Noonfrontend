@@ -32,10 +32,13 @@ const Verify = () => {
       value: "Accept Payment",
       user: deposit.user._id,
     };
+    const order = {
+      _id: deposit.user._id,
+    };
     dispatch(SendNotificaton({ axiosPrivate, item }));
     dispatch(SetSuccessfull({ axiosPrivate, body }));
     dispatch(DeleteDeposit({ axiosPrivate, id: deposit._id }));
-    dispatch(CreateOrder({ axiosPrivate, _id: deposit.user._id }));
+    dispatch(CreateOrder({ axiosPrivate, order }));
     navigate("/system-dashboard");
   };
   const handleReject = () => {
