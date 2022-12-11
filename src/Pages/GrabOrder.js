@@ -6,9 +6,11 @@ import { GetProduct } from "../Features/Orders/Action";
 import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 import { GetAccount } from "../Features/Account/Action";
 import { GrabOrderAction } from "../Features/Orders/Action";
+import { useNavigate } from "react-router-dom";
 
 const GrabOrder = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   const { orderLoading, order, orderError, message } = useSelector(
     (state) => state.order
@@ -21,8 +23,11 @@ const GrabOrder = () => {
   }, [dispatch, axiosPrivate]);
 
   const handleClick = () => {
-    dispatch(GetProduct({ axiosPrivate }));
-    dispatch(GrabOrderAction({ axiosPrivate, commision: account.commision }));
+    const order = {
+      commision: account.commision,
+    };
+    dispatch(GrabOrderAction({ axiosPrivate, order }));
+    navigate("/grab");
   };
   return (
     <div className="w-screen min-h-screen overflow-x-hidden bg-green-100 font-popins flex flex-col">

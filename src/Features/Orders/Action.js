@@ -15,11 +15,9 @@ export const GetProduct = createAsyncThunk(
 
 export const GrabOrderAction = createAsyncThunk(
   "Order/Grab",
-  async ({ axiosPrivate, commision }, { rejectWithValue }) => {
+  async ({ axiosPrivate, order }, { rejectWithValue }) => {
     try {
-      const { data } = await axiosPrivate.patch("/orders/grab-order", {
-        commision,
-      });
+      const { data } = await axiosPrivate.patch("/orders/grab-order", order);
       return data;
     } catch (error) {
       return rejectWithValue(error);

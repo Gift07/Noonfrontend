@@ -25,6 +25,7 @@ const Register = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    localStorage.clear();
     dispatch(SignupAction({ formdata }));
   };
   if (message) return <Navigate to="/sign-in" />;
