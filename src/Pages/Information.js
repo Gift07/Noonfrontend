@@ -14,9 +14,11 @@ const Information = () => {
     (state) => state.account
   );
   const [formdata, setFormData] = useState({
-    name: "",
-    type: "",
-    number: "",
+    name: account.withdraw_account ? account.withdraw_account.account_name : "",
+    type: account.withdraw_account ? account.withdraw_account.account_type : "",
+    number: account.withdraw_account
+      ? account.withdraw_account.account_info
+      : "",
   });
   const handleChange = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
@@ -78,7 +80,8 @@ const Information = () => {
           <div className="flex flex-col py-2">
             <label className="text-xs">Real Name</label>
             <input
-              value={account.user && account.user.username}
+              value={account.user ? account.user.username : ""}
+              readOnly
               className="bg-green-100 p-2 text-xs"
             />
           </div>

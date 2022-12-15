@@ -181,7 +181,10 @@ const Profile = () => {
                       <h1 className="text-green-600 text-3xl font-semibold py-2">
                         ${account.balance}
                       </h1>
-                      <div className="w-full flex items-center justify-between">
+                      <div
+                        onClick={() => navigate("/withdraw")}
+                        className="w-full flex items-center justify-between"
+                      >
                         <button className="bg-green-400 px-3 py-2 rounded-lg text-blue-600 text-xs">
                           Withdraw
                         </button>
@@ -210,7 +213,10 @@ const Profile = () => {
                         <TbReportAnalytics size={28} color="green" />
                         <h1>Team reports</h1>
                       </div>
-                      <div className="flex flex-col items-center justify-between">
+                      <div
+                        onClick={() => navigate("/notification")}
+                        className="flex flex-col items-center justify-between cursor-pointer"
+                      >
                         <IoNotificationsOutline size={28} color="green" />
                         <h1>System notification</h1>
                       </div>

@@ -24,7 +24,9 @@ const Withdraw = () => {
       amount,
       balance: account.balance,
     };
+    console.log(body);
     dispatch(CreateWithdraw({ axiosPrivate, body }));
+    navigate("/profile");
   };
 
   return (

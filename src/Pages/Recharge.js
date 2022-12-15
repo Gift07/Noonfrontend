@@ -1,6 +1,7 @@
 import { useNavigate, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineClose } from "react-icons/ai";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Image from "../Assets/Image.jpeg";
 import React, { useState, useEffect } from "react";
 import {
@@ -20,9 +21,11 @@ const Recharge = () => {
   const [amount, setAmount] = useState(0.0);
   const [transaction, setTransaction] = useState("");
   const [close, setClose] = useState(false);
+  const [binance, setBinance] = useState(false);
   const [error, setError] = useState("");
+  const [isCopied, setIsCopied] = useState(false);
   const rechargeAmounts = [
-    10, 15, 20, 25, 30, 35, 40, 45, 60, 65, 70, 75, 80, 85,
+    10, 15, 20, 25, 30, 35, 40, 45, 60, 65, 70, 75, 80, 85, 90, 95, 100,
   ];
   const { account } = useSelector((state) => state.account);
   useEffect(() => {
@@ -82,7 +85,16 @@ const Recharge = () => {
             </div>
           </div>
           <div className="w-full">
-            <button className="w-full py-3 text-xs bg-blue-700 rounded-xl text-white my-2">
+            <button
+              onClick={() => {
+                if (amount === 0) {
+                  setError("amount can not be zero");
+                } else {
+                  setBinance(!binance);
+                }
+              }}
+              className="w-full py-3 text-xs bg-blue-700 rounded-xl text-white my-2"
+            >
               UsdtPay(trc)
             </button>
             <button
@@ -132,6 +144,83 @@ const Recharge = () => {
                   alt="pay"
                   className="w-11/12 lg:w-7/12 h-96 object-contain"
                 />
+              </div>
+              <div className="w-full px-4 pt-2">
+                <div className="flex flex-col">
+                  <label>Upload the image</label>
+                  <input
+                    type={"file"}
+                    name="file"
+                    className=""
+                    onChange={(e) => setFiles(e.target.files[0])}
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <h1>Transaction serial Number</h1>
+                  <input
+                    placeholder="Enter Number"
+                    value={transaction}
+                    onChange={(e) => setTransaction(e.target.value)}
+                    className="p-2 w-24 lg:w-96 text-black placeholder:text-black outline-none h-6 lg:h-10 bg-green-500 rounded-lg py-3"
+                  />
+                </div>
+                <div className="w-full flex items-center justify-center my-2 text-white">
+                  <button
+                    onClick={handleSubmit}
+                    className="px-6 py-3 bg-blue-500 rounded-xl"
+                  >
+                    I have finished payments
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {binance && (
+        <div className="absolute z-20 w-screen h-screen backdrop-blur">
+          <div className="w-full px-4 lg:px-28 pt-4 flex justify-end">
+            <div
+              onClick={() => setClose(!close)}
+              className="bg-white p-3 rounded-full"
+            >
+              <AiOutlineClose />
+            </div>
+          </div>
+          <div className="w-full flex items-center justify-center px-4 lg:px-28 pt-4">
+            <div className="w-full bg-white rounded-xl">
+              <div className="w-full px-4">
+                <div className="flex items-center justify-between">
+                  <h1>Order</h1>
+                  <h1>21e3r3r2rrtg35</h1>
+                </div>
+                <div className="flex items-center justify-between">
+                  <h1>Amount</h1>
+                  <h1>{amount} usd</h1>
+                </div>
+                <div className="flex items-center justify-between">
+                  <h1>Amount</h1>
+                  <h1>{Math.ceil(amount * 2332)} Tzs</h1>
+                </div>
+              </div>
+              <div className="w-full flex items-center justify-center pt-3">
+                <div>
+                  <h1>Binance Wallet</h1>
+                  <h1>TCqJJ6SyGiTZuf9mEGJRUnnCu6wCdytYoj</h1>
+                  <CopyToClipboard
+                    text={`TCqJJ6SyGiTZuf9mEGJRUnnCu6wCdytYoj`}
+                    onCopy={() => {
+                      setIsCopied(true);
+                      setTimeout(() => {
+                        setIsCopied(false);
+                      }, 1000);
+                    }}
+                  >
+                    <button className="bg-blue-700 px-8 py-2 text-xs rounded-xl my-2 text-white">
+                      Copy
+                    </button>
+                  </CopyToClipboard>
+                </div>
               </div>
               <div className="w-full px-4 pt-2">
                 <div className="flex flex-col">

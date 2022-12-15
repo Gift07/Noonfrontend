@@ -97,12 +97,11 @@ const Admin = () => {
                         <h1>{amount.order_id}</h1>
                       </span>
                       <h1>{amount.user && amount.user.username}</h1>
-                      <h1>{amount.user && amount.user.phonenumber}</h1>
-                      <span>
+                      <span className="flex items-center justify-between">
                         <h1>Balance</h1>
                         <h1>{amount.balance}</h1>
                       </span>
-                      <span>
+                      <span className="flex items-center justify-between">
                         <h1>Requested amount</h1>
                         <h1>amount</h1>
                       </span>

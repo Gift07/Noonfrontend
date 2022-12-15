@@ -5,12 +5,13 @@ import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { GetNotification } from "../Features/Notification/Action";
 import { Bars } from "react-loader-spinner";
+import moment from "moment";
 
 const Notification = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const axiosPrivate = useAxiosPrivate();
-  const { notificationLoading, notificationError, notification } = useSelector(
+  const { notificationLoading, notificationError, notifications } = useSelector(
     (state) => state.notification
   );
   useEffect(() => {
@@ -33,14 +34,16 @@ const Notification = () => {
         ) : notificationError ? (
           <span>{notificationError}</span>
         ) : (
-          notification &&
-          notification.map((not) => (
+          notifications &&
+          notifications.map((not) => (
             <div
               key={not._id}
               className="w-11/12 lg:w-1/2 bg-white shadow rounded-lg p-3"
             >
               <div className="p-2 rounded-lg w-full my-2 bg-gray-100">
-                <h1>{not.createdAt}</h1>
+                <h1>
+                  {moment(not.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
+                </h1>
                 <p>{not.name}</p>
               </div>
             </div>

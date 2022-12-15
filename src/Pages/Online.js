@@ -16,13 +16,35 @@ const Online = () => {
               Our Contacts
             </h1>
             <div className="w-full">
-              <div className="flex items-center gap-x-2">
-                <BsTelegram size={22} />
-                <h1>Telegram</h1>
+              <div>
+                <a
+                  href="https://wa.me/message/25PIISFTOKIUB1"
+                  blank={true}
+                  className="flex items-center gap-x-2 py-2"
+                >
+                  <AiOutlineWhatsApp size={22} />
+                  <h1>Glovo customer service</h1>
+                </a>
               </div>
               <div className="flex items-center gap-x-2 py-2">
-                <AiOutlineWhatsApp size={22} />
-                <h1>whatsapp</h1>
+                <a
+                  href="https://wa.me/qr/QFFXKWDMTULWO1"
+                  blank={true}
+                  className="flex items-center gap-x-2 py-2"
+                >
+                  <AiOutlineWhatsApp size={22} />
+                  <h1>Glovo customer service</h1>
+                </a>
+              </div>
+              <div className="flex items-center gap-x-2 py-2">
+                <a
+                  href="https://chat.whatsapp.com/IaoqQOx8LOZ4x6VuiLt1VK"
+                  blank={true}
+                  className="flex items-center gap-x-2 py-2"
+                >
+                  <AiOutlineWhatsApp size={22} />
+                  <h1>Glovo Whatsapp group</h1>
+                </a>
               </div>
             </div>
           </div>

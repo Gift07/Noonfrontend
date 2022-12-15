@@ -33,10 +33,10 @@ const Reports = () => {
           <h1 className="text-green-500 text-xl font-semibold">Team Reports</h1>
         </div>
         <div className="w-full grid grid-cols-2 gap-4 py-3">
-          <Card name={"Team balance"} value={0} />
-          <Card name={"Level 1 member"} value={4} />
-          <Card name={"Team total recharge"} value={10.1} />
-          <Card name={"Registered members"} value={4} />
+          <Card name={"Team balance"} value={account.team_balance} />
+          <Card name={"Level 1 member"} value={account.children1.length} />
+          <Card name={"Team total recharge"} value={0} />
+          <Card name={"Registered members"} value={account.children1.length} />
         </div>
         <div className="w-full bg-white shadow p-2 rounded-xl mb-28">
           <div className="flex gap-x-6 pt-4 uppercase">
@@ -82,8 +82,8 @@ const Reports = () => {
                         account.children1.map((x) => (
                           <div className="w-full flex flex-col">
                             <div className="w-full flex items-center justify-between py-2">
-                              <h1>James Carter</h1>
-                              <h1>$0</h1>
+                              <h1>{x.name}</h1>
+                              <h1>${x.amount}</h1>
                             </div>
                             <hr />
                           </div>
@@ -98,8 +98,8 @@ const Reports = () => {
                         account.children2.map((x) => (
                           <div className="w-full flex flex-col">
                             <div className="w-full flex items-center justify-between py-2">
-                              <h1>James Carter</h1>
-                              <h1>$0</h1>
+                              <h1>{x.name}</h1>
+                              <h1>${x.amount}</h1>
                             </div>
                             <hr />
                           </div>
@@ -115,8 +115,8 @@ const Reports = () => {
                           account.children3.map((x) => (
                             <div className="w-full flex flex-col">
                               <div className="w-full flex items-center justify-between py-2">
-                                <h1>James Carter</h1>
-                                <h1>$0</h1>
+                                <h1>{x.name}</h1>
+                                <h1>${x.amount}</h1>
                               </div>
                               <hr />
                             </div>

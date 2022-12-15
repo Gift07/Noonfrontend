@@ -66,3 +66,18 @@ export const BindInformation = createAsyncThunk(
     }
   }
 );
+
+export const ApproveWithdraw = createAsyncThunk(
+  "Account/ApproveWithdraw",
+  async ({ axiosPrivate, body }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosPrivate.patch(
+        "/account/approve-withdraw",
+        body
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const CreateWithdraw = createAsyncThunk(
   "withdraw/create",
-  async ({ axiosPrivate, formdata }, { rejectWithValue }) => {
+  async ({ axiosPrivate, body }, { rejectWithValue }) => {
     try {
-      const { data } = await axiosPrivate("withdraw/create", formdata);
+      const { data } = await axiosPrivate.post("withdraw/create", body);
 
       return data;
     } catch (error) {
@@ -27,7 +27,7 @@ export const FetchWithdraws = createAsyncThunk(
 );
 
 export const FetchWithdraw = createAsyncThunk(
-  "withdraw/GetId-",
+  "withdraw/GetId",
   async ({ axiosPrivate, id }, { rejectWithValue }) => {
     try {
       const { data } = await axiosPrivate.get(`withdraw/${id}`);
@@ -40,10 +40,13 @@ export const FetchWithdraw = createAsyncThunk(
 );
 
 export const DeleteWithdraw = createAsyncThunk(
-  "withdraw/DeleteAll",
+  "withdraw/Delete",
   async ({ axiosPrivate, id }, { rejectWithValue }) => {
+    console.log(id);
     try {
-      const { data } = await axiosPrivate.get(`withdraw/delete/${id}`);
+      const { data } = await axiosPrivate.delete(
+        `withdraw/delete-withdraw/${id}`
+      );
 
       return data;
     } catch (error) {
