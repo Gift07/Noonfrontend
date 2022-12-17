@@ -15,7 +15,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const axiosPrivate = useAxiosPrivate();
-  const access = localStorage.getItem("access");
   const { accountloading, accountError, account } = useSelector(
     (state) => state.account
   );
