@@ -54,3 +54,15 @@ export const DeleteWithdraw = createAsyncThunk(
     }
   }
 );
+
+export const GetAccountInfo = createAsyncThunk(
+  "Account/withdraw",
+  async ({ axiosPrivate, body }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosPrivate.post("/account/withdraw-info");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

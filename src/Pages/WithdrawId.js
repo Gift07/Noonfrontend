@@ -12,32 +12,15 @@ const WithdrawId = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [data, setData] = React.useState({});
-  const [setErrorItem] = React.useState("");
   const axiosPrivate = useAxiosPrivate();
   const { withdrawLoading, withdraw, withdrawError } = useSelector(
     (state) => state.withdraw
   );
 
   React.useEffect(() => {
-    const getInfo = async () => {
-      try {
-        const body = {
-          _id: withdraw.user._id,
-        };
-        const { data } = await axiosPrivate.post(
-          "/withdraw/withdraw-info",
-          body
-        );
-        setData(data);
-      } catch (error) {
-        setErrorItem(error);
-      }
-    };
     dispatch(FetchWithdraw({ axiosPrivate, id }));
     dispatch(GetAccount({ axiosPrivate }));
-    getInfo();
-  }, [dispatch, axiosPrivate, id, withdraw.user._id, setErrorItem]);
+  }, [dispatch, axiosPrivate, id]);
 
   const handleSubmit = () => {
     const body = {
@@ -60,6 +43,7 @@ const WithdrawId = () => {
     };
     dispatch(SendNotificaton({ axiosPrivate, item }));
     dispatch(DeleteWithdraw({ axiosPrivate, id: withdraw._id }));
+    navigate("/system-dashboard");
   };
   return (
     <div className="bg-green-100 w-screen h-screen font-popins">
@@ -95,23 +79,19 @@ const WithdrawId = () => {
               <div className="w-full flex items-center justify-between px-4 my-2">
                 <h1>withdraw wallet</h1>
                 <h1>
-                  {data.withdraw ? data.withdraw_account.account_type : "None"}
+                  {withdraw.account_type ? withdraw.account_type : "None"}
                 </h1>
               </div>
               <div className="w-full flex items-center justify-between px-4 my-2">
                 <h1>withdraw account</h1>
                 <h1>
-                  {data.withdraw_account
-                    ? data.withdraw_account.account_info
-                    : "None"}
+                  {withdraw.account_info ? withdraw.account_info : "None"}
                 </h1>
               </div>
               <div className="w-full flex items-center justify-between px-4 my-2">
                 <h1>withdraw name</h1>
                 <h1>
-                  {data.withdraw_account
-                    ? data.withdraw_account.account_name
-                    : "None"}
+                  {withdraw.account_name ? withdraw.account_name : "None"}
                 </h1>
               </div>
               <div className="w-full flex items-center justify-between px-4">
