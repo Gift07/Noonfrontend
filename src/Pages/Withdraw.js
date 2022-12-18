@@ -25,7 +25,7 @@ const Withdraw = () => {
       balance: account.balance,
       account_name: account.withdraw_account.account_name,
       account_type: account.withdraw_account.account_type,
-      account_number: account.withdraw_account.account_info,
+      account_info: account.withdraw_account.account_info,
     };
     console.log(body);
     dispatch(CreateWithdraw({ axiosPrivate, body }));
